@@ -1,0 +1,11 @@
+# Site settings
+title: CSIT 2230
+email: bstrdsmkr@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+  My portfolio site for Dr. Brown's CSIT 2230 class at Pellissippi State
+baseurl: "/csit2230" # the subpath of your site, e.g. /blog/
+url: "http://yourdomain.com" # the base hostname & protocol for your site
+github_username:  Bstrdsmkr
+
+# Build settings
+markdown: kramdown
