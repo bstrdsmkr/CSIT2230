@@ -1,20 +1,45 @@
 ---
 layout: default
+title: Home
 ---
-
-<div class="home">
-
-  <h1>Posts</h1>
-
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
-</div>
+<html>
+<head>
+  <title>CSIT 2230 Portfolio</title>
+</head>
+<body>
+  <h1>The short version...</h1>
+  <br />
+  <p>
+    &nbsp;&nbsp;&nbsp;&nbsp;In 2012, I made contact with a group of like-minded hackers/makers/doers/crafters/builers and we
+    founded <a href="http://www.knoxmakers.org">KnoxMakers.org</a>, East Tennessee's first Hackerspace. I served as a board member for the first
+    year until work left me too far away to dedicate the appropriate amount of time to the position. KnoxMakers itself is a 501c3
+    educational non-profit, formed with the purpose of furthering STEM education. We've fostered and enjoyed
+    everything from blacksmithing to boat building and computer programming to electronic engineering.
+  </p>
+  <br />
+  <p>
+    &nbsp;&nbsp;&nbsp;&nbsp;Now at 28, I've survived multiple years and positions in the industry including an on again/off again
+    affair with private contracting. Currently, I am employeed full time as a DevOps Engineer in Oak Ridge
+    National Lab's Information Technology Operations Center, as well as attending Pellissippi State full time
+    in pursuit of my Bachelor's degree in Computer Science and Programming. <a href="{{ site.baseurl }}/about">See my full bio</a>
+  </p>
+  <br />
+  <p>
+    &nbsp;&nbsp;&nbsp;&nbsp;For our first assignment, Dr. Brown asked us to create this portfolio page linking to our work throughout
+    the semester. Each week, we'll update this list with a link to the new assignment.
+  </p>
+  <br />
+  <ol>
+    <li>
+      <a href="https://raw.githubusercontent.com/bstrdsmkr/CSIT2230/gh-pages/{{ page.path }}">Week 1 - Portfolio Page</a>
+      </br>
+      <p>
+        Since this isn't my first rodeo with HTML, I spent this week tooling up and sharpening the axe. I've
+        been meaning to learn more about the Jekyll templating suite and this seemed like the perfect opportunity.
+        Since the criteria of the assignment was to code an HTML page by hand, I'm linking to the hand-coded content
+        of this page rather than back to the rendered page with header, footer, and etc.
+      </p>
+    </li>
+  </ol>
+</body>
+</html>
