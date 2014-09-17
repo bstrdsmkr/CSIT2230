@@ -1,0 +1,77 @@
+---
+layout: ~
+title: "week4-bootstrap"
+date: "2014-09-15"
+permalink: /week4-bootstrap/
+---
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Form Process Steps - Bootsnipp.com</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link  href="../css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link  href="../css/week4.css" rel="stylesheet"/>
+    <script src="../javascript/jquery-1.11.1.min.js"></script>
+    <script src="../javascript/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="btn-group btn-group-vertical" data-toggle="buttons">
+        <label class="distro row btn well">
+          <img class="distro-icon img-responsive col-xs-4" src="../images/ubuntu_icon.png"/>
+          <input type="radio" name="options" id="option1"> Ubuntu 14.04
+        </label>
+        <label class="distro btn well row">
+          <img class="distro-icon img-responsive col-xs-4" src="../images/redhat_icon.png"/>
+          <input type="radio" name="options" id="option2"> RedHat 7
+        </label>
+        <label class="distro btn well row">
+          <img class="distro-icon img-responsive col-xs-4" src="../images/opensuse_icon.svg"/>
+          <input type="radio" name="options" id="option3"> OpenSUSE 13.10
+        </label>
+        <label class="distro btn well row">
+          <img class="distro-icon img-responsive col-xs-4" src="../images/centos_icon.svg"/>
+          <input type="radio" name="options" id="option3"> CentOS 7
+        </label>
+      </div>
+    </div>
+  <!-- </div>
+  <div class="container"> -->
+    <div class="row stage-bar" style="border-bottom:0;">
+
+      <div class="col-xs-3 stage-bar-pip complete">
+        <div class="text-center stage-bar-pip-icon">Icon</div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a href="#" class="stage-bar-dot"></a>
+        <div class="stage-bar-info text-center">Choose your distribution</div>
+      </div>
+
+      <div class="col-xs-3 stage-bar-pip complete"><!-- complete -->
+        <div class="text-center stage-bar-pip-icon">Icon</div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a href="#" class="stage-bar-dot"></a>
+        <div class="stage-bar-info text-center">Select Packages to install</div>
+      </div>
+
+      <div class="col-xs-3 stage-bar-pip active"><!-- complete -->
+        <div class="text-center stage-bar-pip-icon">Icon</div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a href="#" class="stage-bar-dot"></a>
+        <div class="stage-bar-info text-center">Enable optional configurations</div>
+      </div>
+
+      <div class="col-xs-3 stage-bar-pip disabled"><!-- active -->
+        <div class="text-center stage-bar-pip-icon">Icon</div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <a href="#" class="stage-bar-dot"></a>
+        <div class="stage-bar-info text-center">Confirm and deploy your configuration</div>
+      </div>
+    </div>
+	</div>
+</div>
+</body>
+</html>
