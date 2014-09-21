@@ -1,0 +1,155 @@
+
+/* ==========================================================================
+   COLOR CODES
+   ========================================================================== */
+
+.color-red {
+    color: #a30000;
+}
+
+.color-green {
+    color: #07BB00;
+}
+
+.color-light-blue {
+    color: #BB00BB;
+}
+
+.color-blue {
+    color: #0052FF;
+}
+
+.color-yellow {
+    color: rgba(255, 241, 95, 0.99);
+}
+
+.color-black {
+    color: #000000;
+}
+
+.section {
+    background-color: rgba(102, 110, 197, 1);
+    /*color: #fff;*/
+}
+/*===================================================
+   SOCIAL ICON STYLES
+  =====================================================*/
+
+
+.color-facebook {
+    color: #3B5998;
+}
+
+.color-twitter {
+    color: #00aced;
+}
+
+.color-google-plus {
+    color: #dd4b39;
+}
+
+.color-linkedin {
+    color: #007bb6;
+}
+
+.color-pinterest {
+    color: #cb2027;
+}
+/* ===========================================================
+   BOOTSTRAP ELEMENTS CHANGES
+   ============================================================*/
+.navbar {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.navbar-inverse {
+    background: #000;
+    border-color: #000;
+}
+
+    .navbar-inverse .navbar-nav > .active > a {
+        background: #ffffff;
+    }
+
+    .navbar-inverse .navbar-brand {
+        color: #fff;
+        font-weight: bolder;
+        font-size: 25px;
+        font-weight: 900;
+        letter-spacing: 2px;
+    }
+
+    .navbar-inverse :hover .navbar-brand:hover {
+        color: #fff;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #FFFFFF;
+    }
+
+
+/* ==========================================================================
+   FOOTER SECTION
+   ========================================================================== */
+body {
+  background: rgb(99, 0, 0);
+}
+#panels {
+    background: url(../images/circus/Circus.png) no-repeat center center fixed;
+    background-size: cover;
+    height: auto;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    padding: 100px 0;
+    color: rgba(255, 241, 95, 0.99);
+}
+/*#panels .panel-body {
+  opacity: 0.75;
+}*/
+.panel-transparent {
+        background: none;
+    }
+.panel-transparent .panel-body{
+        background: rgba(99, 0, 0, 0.75)!important;
+    }
+#footer {
+    background-color: #000;
+    color: #fff;
+    padding: 30px;
+    /*position: relative;*/
+}
+
+#music .lead-image {
+  float: left;
+  clear: left;
+  padding-right: 10px;
+}
+
+#fight .lead-image {
+  /*height: 100%;*/
+}
+#kangaroo {
+  /*width: 100%;*/
+}
+#vs {
+  max-width: 200px;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+@font-face {
+   font-family: Circus;
+   src: url(../fonts/CarnevaleeFreakshow.ttf) format("truetype");
+}
+
+.circus-font {
+   font-family: Circus , Calibri, Arial, Georgia, Verdana, Sans-Serif;
+   font-size: 5em;
+}
