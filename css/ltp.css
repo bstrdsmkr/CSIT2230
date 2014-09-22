@@ -25,15 +25,8 @@
 .stage-bar > .stage-bar-pip.disabled a.stage-bar-dot{ pointer-events: none; }
 
 .distro-choices {
-  /*position: absolute;*/
   min-width: 400px;
-  width: 30%;
-  height: auto;
-  /*left:33%;*/
-  top: auto;
-  bottom: 160px;
-  /*float: none;
-  margin: 0 auto;*/
+  top: 50px;
 }
 .distro-icon {
   min-width: 50px;
