@@ -1,0 +1,57 @@
+---
+layout: ~
+title: "Week 5 - Javascript"
+date: "2014-09-22"
+permalink: "/week5-javascript/"
+---
+
+<html>
+<head>
+  <title>Form Generator</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet" />
+  <script>
+    function make_title(text) {
+      var template = '<h1>{text}</h1>'
+    }
+    function make_text(spec) {
+      // text, item_name, label_title, default_value
+      var template = "<textarea class='col-xs-12' rows='10' id='{item_name}' placeholder='{default_value}'></textarea>";
+
+    }
+    function make_checkbox(spec) {
+      // checkbox, item_name, label_title, state
+      var template = '<input type="checkbox" name="{item_name}" {checked} /> <label for="{item_name}">{label_title}</label>';
+    }
+    function make_radio(spec) {
+      // radio, group_name, label_title, title1, title2, ..., default_item
+      var template = '<input type="radio" name="{}" ';
+    }
+    function make_popup(spec) {
+      // popup, item_name, label_title, item_title1, item_title2, ..., default_item
+      var template = '';
+    }
+    function make_button(spec) {
+      // button, item_name, label_title
+      var template = '<button id="{item_name}" class="btn btn-primary">{label_title}</button>';
+    }
+    var lines = $('#form_input').val().split('\n');
+
+  </script>
+</head>
+<body>
+  <div id="content" class="container">
+    <div id="input_box" class="row">
+      <textarea class="col-xs-12" rows="10" id="form_input" placeholder="Enter your form description"></textarea>
+      <button class="btn btn-primary" onClick="generate_form();">Go!</button>
+
+    </div>
+    <div id="form_holder" class="row">
+
+    </div>
+    <!-- CORE JQUERY LIBRARY -->
+    <script src="../javascript/jquery.js"></script>
+    <!-- CORE BOOTSTRAP LIBRARY -->
+    <script src="../javascript/bootstrap.min.js"></script>
+  </div>
+</body>
+</html>
