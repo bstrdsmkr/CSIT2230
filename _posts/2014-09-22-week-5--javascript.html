@@ -47,17 +47,17 @@ permalink: "/week5-javascript/"
     function make_popup(spec) {
       console.log('making popup');
       // popup, item_name, label_title, item_title1, item_title2, ..., default_item
-      var main_template = '<label for="{}"></label><select class="form-control" name="{}">{}</select>';
+      var main_template = '<label>{}</label><select class="form-control" name="{}">{}</select>';
       var item_template = '<option>{}</option>';
       var default_item = spec[spec.length - 1];
 
-      var raw_items = spec.slice(4, spec.length);
+      var raw_items = spec.slice(3, spec.length);
       for (var i = 0; i < raw_items.length; i++) {
         // concurrent modification... yay...
         raw_items[i] = item_template.format(raw_items[i])
       }
 
-      return main_template.format(spec[1], spec[1], raw_items.join(""))
+      return main_template.format(spec[2], spec[1], raw_items.join(""))
     }
 
     function make_button(spec) {
@@ -94,7 +94,9 @@ permalink: "/week5-javascript/"
             break;
           case 'popup':
             console.log('dispatching popup');
-            elements.push(make_popup(spec));
+            element_html = make_popup(spec);
+            console.log(element_html);
+            elements.push(element_html);
             break;
           case 'button':
             console.log('dispatching button');
