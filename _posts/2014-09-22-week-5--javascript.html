@@ -9,49 +9,131 @@ permalink: "/week5-javascript/"
 <head>
   <title>Form Generator</title>
   <link href="../css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../css/magister.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
   <script>
-    function make_title(text) {
-      var template = '<h1>{text}</h1>'
-    }
     function make_text(spec) {
+      console.log('making text');
       // text, item_name, label_title, default_value
-      var template = "<textarea class='col-xs-12' rows='10' id='{item_name}' placeholder='{default_value}'></textarea>";
+      var template = '<label class="">{}</label><input type="text" class="form-control" id="{}" placeholder="{}">';
+      return template.format(spec[2], spec[1], spec[3]);
+    }
 
-    }
     function make_checkbox(spec) {
+      console.log('making checkbox');
       // checkbox, item_name, label_title, state
-      var template = '<input type="checkbox" name="{item_name}" {checked} /> <label for="{item_name}">{label_title}</label>';
+      var template = '<div class="checkbox"><label><input type="checkbox" name="{}" {}/>{}</label></div>';
+      var state = spec[3].toLowerCase() == "on" ? "checked" : "";
+      return template.format(spec[1], state, spec[2])
     }
+
     function make_radio(spec) {
+      console.log('making radio');
       // radio, group_name, label_title, title1, title2, ..., default_item
-      var template = '<input type="radio" name="{}" ';
+      var main_template = '<fieldset><legend class="subtitle">{}</legend>{}</fieldset>';
+      var item_template = '<div class="radio"><label><input name="{}" type="radio">{}<label></div>';
+      var default_item = spec[spec.length - 1];
+
+      var raw_items = spec.slice(3, spec.length);
+      console.log('radio raw_items: '+raw_items);
+      for (var i = 0; i < raw_items.length; i++) {
+        // concurrent modification... yay...
+        raw_items[i] = item_template.format(spec[1], raw_items[i]);
+      }
+
+      return main_template.format(spec[2], raw_items.join(""))
     }
+
     function make_popup(spec) {
+      console.log('making popup');
       // popup, item_name, label_title, item_title1, item_title2, ..., default_item
-      var template = '';
+      var main_template = '<label for="{}"></label><select class="form-control" name="{}">{}</select>';
+      var item_template = '<option>{}</option>';
+      var default_item = spec[spec.length - 1];
+
+      var raw_items = spec.slice(4, spec.length);
+      for (var i = 0; i < raw_items.length; i++) {
+        // concurrent modification... yay...
+        raw_items[i] = item_template.format(raw_items[i])
+      }
+
+      return main_template.format(spec[1], spec[1], raw_items.join(""))
     }
+
     function make_button(spec) {
+      console.log('making button');
       // button, item_name, label_title
-      var template = '<button id="{item_name}" class="btn btn-primary">{label_title}</button>';
+      var template = '<button id="{}" class="btn btn-primary">{}</button>';
+      return template.format(spec[1], spec[2])
     }
-    var lines = $('#form_input').val().split('\n');
+
+    function generate_form() {
+      console.log('generating form');
+      form_template = '<form><legend class="title">{}</legend><div class="form-group">{}</div></form>'
+      var lines = $('#form_input').val().split('\n');
+      var elements = new Array();
+      for (var i = 0; i < lines.length; i++) {
+        console.log('looping main: '+i)
+        var spec = lines[i].split(',');
+        switch (spec[0]) {
+          case 'text':
+            console.log('dispatching text');
+            elements.push(make_text(spec));
+            break;
+          case 'checkbox':
+            console.log('dispatching checkbox');
+            element_html = make_checkbox(spec);
+            console.log(element_html);
+            elements.push(element_html);
+            break;
+          case 'radio':
+            console.log('dispatching radio');
+            element_html = make_radio(spec);
+            console.log(element_html);
+            elements.push(element_html);
+            break;
+          case 'popup':
+            console.log('dispatching popup');
+            elements.push(make_popup(spec));
+            break;
+          case 'button':
+            console.log('dispatching button');
+            elements.push(make_button(spec));
+            break;
+        }
+      }
+      form_html = form_template.format(lines[0], elements.join(''));
+      $('#form_holder').html(form_html);
+    }
+
 
   </script>
 </head>
-<body>
-  <div id="content" class="container">
-    <div id="input_box" class="row">
-      <textarea class="col-xs-12" rows="10" id="form_input" placeholder="Enter your form description"></textarea>
-      <button class="btn btn-primary" onClick="generate_form();">Go!</button>
-
+<body class="theme-invert">
+  <!-- <section class="section"> -->
+    <div class="container">
+      <div class="row">
+        <div id="input_box" class="form-group col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">
+          <textarea class="col-xs-12" rows="10" id="form_input" placeholder="Enter your form description"></textarea>
+          <button class="btn btn-primary" onClick="generate_form();">Go!</button>
+        </div>
+      </div>
     </div>
-    <div id="form_holder" class="row">
+  <!-- </section> -->
+  <!-- <section class="section"> -->
+    <div class="container"/>
+      <div class="row">
+        <div id="form_holder" class="form-group col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
 
+        </div>
+      </div>
     </div>
+  <!-- </section> -->
     <!-- CORE JQUERY LIBRARY -->
     <script src="../javascript/jquery.js"></script>
     <!-- CORE BOOTSTRAP LIBRARY -->
     <script src="../javascript/bootstrap.min.js"></script>
-  </div>
+    <!-- STRING.FORMAT() FOR JAVASCRIPT -->
+    <script src="../javascript/string-format.js"></script>
 </body>
 </html>

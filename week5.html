@@ -1,0 +1,20 @@
+<html>
+<head>
+  <script>
+  all_colors = ['red', 'orange', 'yellow', 'green', 'blue', 'violet', 'indigo']
+  idx = 0;
+  function color_cycle() {
+    set_interval(cycle, 100);
+  }
+
+  function cycle() {
+    $('#target').color(all_colors[idx]);
+    idx %= all_colors.length;
+  }
+
+  </script>
+</head>
+  <body onload="color_cycle();">
+    <h1 id="target">Rainbow Text</h1>
+  </body>
+</html>
