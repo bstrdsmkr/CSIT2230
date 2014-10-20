@@ -1,0 +1,53 @@
+/*
+    adapted from https://github.com/rheh/HTML5-canvas-projects/blob/master/matching_game/css/style.css
+*/
+
+root {
+    display: block;
+}
+
+body {
+  background-color: #fff;
+  margin: 20px 0 0 0;
+}
+
+#game {
+  width: 600px;
+  margin: 0 auto;
+}
+
+header div {
+  height: 40px;
+  font-size: 18px;
+  color: #a67900;
+  padding-top: 15px;
+}
+
+#board {
+  padding-top: 10px;
+    width: 460px;
+    height: 450px;
+  background-color: rgb(228, 223, 208);
+}
+
+.tile {
+  float:left;
+  width: 100px;
+  height: 100px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #cfcfcf;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.tile:hover {
+  opacity: 0.6;
+}
+
+.tile img {
+  display: block;
+  margin: 0 auto;
+  padding-top: 25px;
+  width: 50px;
+}

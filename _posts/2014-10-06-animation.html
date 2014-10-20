@@ -1,0 +1,90 @@
+---
+layout: ~
+title: "Animation"
+date: "2014-10-06"
+permalink: "/animation/"
+---
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+body {
+margin: 0px;
+padding: 0px;
+}
+</style>
+<script>
+// I took a canvas animation framework from:
+// http://www.html5canvastutorials.com/advanced/html5-canvas-animation-stage/
+//
+// Global Variables
+//
+var canvas;
+var context;
+
+//
+// doStartup
+//
+// Get canvas and context and begin the animation.
+//
+function doStartup() {
+canvas = document.getElementById("myCanvas");
+context = canvas.getContext("2d");
+
+window.requestAnimFrame = (function(callback) {
+return window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
+window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+function(callback) {
+window.setTimeout(callback, 1000 / 60);
+};
+})();
+context.font = "24px Arial";
+animate();
+}
+//
+// animage
+//
+// Called every frame.
+//
+function animate() {
+// clear the canvas
+context.clearRect(0, 0, canvas.width, canvas.height);
+drawCircle(100,100,25,"#FF0000");
+// request new frame
+requestAnimFrame(function() {
+animate();
+});
+
+}
+
+//
+// drawCircle
+//
+// Utility function to draw a colored circle.
+//
+function drawCircle(x, y, radius, color) {
+context.beginPath();
+context.arc(x,y,radius,0,2*Math.PI);
+context.fillStyle = color;
+context.fill();
+}
+
+//
+// drawRect
+//
+// Utility function to draw a colored rectangle.
+//
+function drawRect(x, y, l, w, color) {
+context.fillStyle = color;
+context.fillRect(x, y, l, w);
+}
+
+</script>
+</head>
+<body onload="doStartup();">
+<p>
+<canvas id="myCanvas" width="800" height="500" style="border:1px solid #000000;">
+</canvas></p>
+</body>
+</html>

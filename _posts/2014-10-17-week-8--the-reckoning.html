@@ -5,46 +5,26 @@ date: "2014-10-17"
 permalink: "/week8-thereckoning/"
 ---
 
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>jQuery Blockbreaker</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../css/magister.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
-  </head>
-  <body class="theme-invert">
-    <div id="hud" class="subtitle" style="position: absolute;"></div>
-    <div id="instructions" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title title" style="color: #222">Instructions</h4>
-          </div>
-          <div class="modal-body">
-            <p>Use the left and right arrow keys to move the platform back and forth.</p>
-            <p>Knock the ball into the blocks to eliminate them.</p>
-            <p>Use the speed and direction of the paddle to apply "spin" to the ball.</p>
-            <p>Use the down arrow key to stop the paddle completely.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Start Game!</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+<head>
+  <title>exam 1</title>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
+  <script src="../javascript/tile.js"></script>
+  <script src="../javascript/matching.js"></script>
+  <script src="../javascript/bootstrap.min.js"></script>
 
-    <!-- CORE JQUERY LIBRARY -->
-    <script src="../javascript/jquery-1.11.1.min.js"></script>
-    <!-- CORE BOOTSTRAP LIBRARY -->
-    <script src="../javascript/bootstrap.min.js"></script>
-    <!-- jCavas Library -->
-    <script src="../javascript/jcanvas.min.js"></script>
-    <!-- Vector lib -->
-    <script src="../javascript/vector.js"></script>
-    <!-- Quadtree lib -->
-    <script src="../javascript/quadtree.js"></script>
-    <!-- Custom javascript -->
-    <script src="../javascript/week6.js"></script>
-  </body>
+  <link href="../css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../css/week8.css"/>
+</head>
+<body>
+  <div id="score">Score: 0</div>
+  <div id="timer">Time: 0s</div>
+  <article id="game">
+    <section id="board">
+    </section>
+    <button id="startGameButton" class="btn btn-success">Start Game</button>
+  </article>
+</body>
 </html>
