@@ -1,55 +1,43 @@
 var tiles = [];
-var flips = new Array('tb', 'bt', 'lr', 'rl' );
-var iFlippedTile = null;
-var iTileBeingFlippedId = null;
+var flippedTile = null;
+var currTileID = null;
 var tileImages = new Array(1,2,3,4,5,6,7,8);
 var tileAllocation = null;
-var iTimer = 0;
-var iInterval = 100;
-var iPeekTime = 3000;
+var timer = 0;
+var flipInterval = 100;
+var peekTime = 3000;
 var timePlayed = 0;
 var timerId = null;
 var score = 0;
+var clickGate = 0;
+
 
 function getRandomImageForTile() {
+  var idx = Math.floor((Math.random() * tileAllocation.length));
+  var occurances = 2;
 
-  var iRandomImage = Math.floor((Math.random() * tileAllocation.length)),
-    iMaxImageUse = 2;
-
-  while(tileAllocation[iRandomImage] >= iMaxImageUse ) {
-
-    iRandomImage = iRandomImage + 1;
-
-    if(iRandomImage >= tileAllocation.length) {
-
-      iRandomImage = 0;
+  while(tileAllocation[idx] >= occurances) {
+    idx++;
+    if(idx >= tileAllocation.length) {
+      idx = 0;
     }
   }
-
-  return iRandomImage;
+  return idx;
 }
 
-function createTile(iCounter) {
+function createTile(tile_idx) {
 
-  var curTile =  new tile("tile" + iCounter),
-    iRandomImage = getRandomImageForTile();
+  var this_tile =  new tile("tile" + tile_idx);
+  var img_idx = getRandomImageForTile();
 
-  tileAllocation[iRandomImage] = tileAllocation[iRandomImage] + 1;
+  tileAllocation[img_idx]++;
+  this_tile.setStartAt(500 * Math.floor((Math.random() * 5) + 1));
+  this_tile.setBackContentImage("../images/" +(img_idx + 1)+ ".jpg");
 
-  curTile.setFrontColor("tileColor" + Math.floor((Math.random() * 5) + 1));
-  curTile.setStartAt(500 * Math.floor((Math.random() * 5) + 1));
-  curTile.setFlipMethod(flips[Math.floor((Math.random() * 3) + 1)]);
-  curTile.setBackContentImage("images/" +  (iRandomImage + 1) + ".jpg");
-
-  return curTile;
+  return this_tile;
 }
 
 function initState() {
-
-  /* Reset the tile allocation count array.  This
-    is used to ensure each image is only
-    allocated twice.
-  */
   tileAllocation = new Array(0,0,0,0,0,0,0,0);
 
   //kill all the tile objs
@@ -58,7 +46,7 @@ function initState() {
   }
 
   $('#board').empty();
-  iTimer = 0;
+  timer = 0;
 
 }
 
@@ -70,37 +58,24 @@ function initTiles() {
   for(i = 0; i < 16; i++) {
 
     var curTile = createTile(i);
-
     $('#board').append(curTile.getHTML());
-
     tiles.push(curTile);
   }
 }
 
 function hideTiles(callback) {
-
-  var iCounter = 0;
-
-  for(iCounter = 0; iCounter < tiles.length; iCounter++) {
-
-    tiles[iCounter].revertFlip();
-
+  for(i = 0; i < tiles.length; i++) {
+    tiles[i].revertFlip();
   }
-
   callback();
 }
 
 function revealTiles(callback) {
-
-  var iCounter = 0,
-    bTileNotFlipped = false;
-
-  for(iCounter = 0; iCounter < tiles.length; iCounter++) {
-
-    if(tiles[iCounter].getFlipped() === false) {
-
-      if(iTimer > tiles[iCounter].getStartAt()) {
-        tiles[iCounter].flip();
+  var bTileNotFlipped = false;
+  for(i = 0; i < tiles.length; i++) {
+    if(tiles[i].getFlipped() === false) {
+      if(timer > tiles[i].getStartAt()) {
+        tiles[i].flip();
       }
       else {
         bTileNotFlipped = true;
@@ -108,54 +83,50 @@ function revealTiles(callback) {
     }
   }
 
-  iTimer = iTimer + iInterval;
+  timer += flipInterval;
 
   if(bTileNotFlipped === true) {
-    setTimeout("revealTiles(" + callback + ")", iInterval);
+    setTimeout("revealTiles(" + callback + ")", flipInterval);
   } else {
     callback();
   }
 }
 
 function checkMatch() {
-
-  if(iFlippedTile === null) {
-
-    iFlippedTile = iTileBeingFlippedId;
+  if(flippedTile === null) {
+    flippedTile = currTileID;
 
   } else {
-
-    if( tiles[iFlippedTile].getBackContentImage() !== tiles[iTileBeingFlippedId].getBackContentImage()) {
-
-      setTimeout("tiles[" + iFlippedTile + "].revertFlip()", 2000);
-      setTimeout("tiles[" + iTileBeingFlippedId + "].revertFlip()", 2000);
+    if( tiles[flippedTile].getBackContentImage() !== tiles[currTileID].getBackContentImage()) {
+      setTimeout("tiles[" + flippedTile + "].revertFlip()", 2000);
+      setTimeout("tiles[" + currTileID + "].revertFlip()", 2000);
 
     } else {
       score++;
       $('#score').html('Score: ' +score);
     }
 
-    iFlippedTile = null;
-    iTileBeingFlippedId = null;
+    flippedTile = null;
+    currTileID = null;
   }
 }
 
 function onPeekComplete() {
-
   $('div.tile').click(function() {
-
-    iTileBeingFlippedId = this.id.substring("tile".length);
-
-    if(tiles[iTileBeingFlippedId].getFlipped() === false) {
-      tiles[iTileBeingFlippedId].addFlipCompleteCallback(function() { checkMatch(); });
-      tiles[iTileBeingFlippedId].flip();
+    if (clickGate < 2){
+      clickGate++;
+      setTimeout(function(){clickGate--;}, 3000);
+      currTileID = this.id.substring("tile".length);
+      if(tiles[currTileID].getFlipped() === false) {
+        tiles[currTileID].addFlipCompleteCallback(function() { checkMatch(); });
+        tiles[currTileID].flip();
+      }
     }
-
   });
 }
 
 function onPeekStart() {
-  setTimeout("hideTiles( function() { onPeekComplete(); })", iPeekTime);
+  setTimeout("hideTiles( function() { onPeekComplete(); })", peekTime);
 }
 
 function startTimer(){
@@ -190,7 +161,7 @@ $(document).ready(function() {
     initTiles();
     startTimer();
 
-    setTimeout("revealTiles(function() { onPeekStart(); })", iInterval);
+    setTimeout("revealTiles(function() { onPeekStart(); })", flipInterval);
 
   });
 });

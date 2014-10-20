@@ -9,16 +9,11 @@ function tile(id) {
   this.flipCompleteCallbacks = [];
 
   this.flip = function() {
-
-    $("#" + this.id).flip({
-      direction: this.flipMethod,
-      color: this.backColor,
-      content: this.getBackContent(),
+    $("#" + this.id).html(this.getBackContent());
+    $("#" +this.id+ " img").show('slide', {
+      direction: 'up',
       complete: this.onFlipComplete()
-    });
-
-    $("#" + this.id + " img").show();
-
+    }, 5000);
     this.flipped = true;
   };
 
@@ -35,12 +30,9 @@ function tile(id) {
   };
 
   this.revertFlip = function() {
-
-    console.log("Reverting tile " + this.id);
-
-    $("#" + this.id + " img").hide();
-
-    $("#" + this.id).revertFlip();
+    $("#" +this.id+ " img").hide('slide', {
+        direction: 'up'
+    }, 1000);
 
     this.flipped = false;
   };
@@ -65,12 +57,8 @@ function tile(id) {
     this.backColor = sColor;
   };
 
-  this.setFlipMethod = function(sFlipMethod) {
-    this.flipMethod = sFlipMethod;
-  };
-
   this.getHTML = function() {
-    return '<div id="' + this.id + '" class="tile ' + this.frontColor + '">' + '</div>';
+    return '<div id="' +this.id+ '" class="tile"></div>';
   };
 
   this.getStartAt = function() {
@@ -82,7 +70,7 @@ function tile(id) {
   };
 
   this.getBackContent = function() {
-    return '<img src="' + this.backContentImage + '"/>';
+    return '<img src="' +this.backContentImage+ '"/>';
   };
 
   this.getBackContentImage = function() {
