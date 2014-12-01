@@ -1,0 +1,21 @@
+<html>
+
+<head>
+  <title>AJAX Test</title>
+  <script src="../javascript/jquery.js"></script>
+</head>
+<script>
+  $(document).ready(function(){
+    $.post('backend.php', function(data){
+      $("#target").html(data);
+    });
+  });
+</script>
+
+<body>
+  <div id="target">
+
+  </div>
+</body>
+
+</html>

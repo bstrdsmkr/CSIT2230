@@ -1,0 +1,106 @@
+<html>
+
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/material-wfont.min.css">
+  <link rel="stylesheet" type="text/css" href="css/ripples.min.css">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" type="text/css" href="css/custom.css">
+  <style>
+    .panel-default {
+     opacity: 0.9;
+     margin-top:30px;
+    }
+    .panel-footer {
+      color: #000;
+    }
+    .form-group.last {
+     margin-bottom:0px;
+    }
+    label {
+      color: #555;
+    }
+    a {
+      color: #66f;
+    }
+  </style>
+  <script src="javascript/jquery.js"></script>
+  <script>
+    function check(input) {
+      if ($(input).val() != $("#password").val()) {
+        // alert('"' +$(input).val()+ '"');
+        // alert('"'+$("#password").val()+'"');
+        input.setCustomValidity('Passwords must match.');
+      } else {
+        input.setCustomValidity('');
+      }
+    }
+    $(document).ready(function() {
+      $("#login-form").submit(function() {
+
+        $.ajax({
+          type: "POST",
+          url: "process_login.php",
+          data: $("#login-form").serialize(),
+          success: function(data) {
+            window.location.href = data.redirect;
+          },
+          error: function(req, status, msg) {
+            $("#error-box").text(msg);
+          }
+        });
+
+        return false; // override the default submit
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-7">
+        <div class="panel panel-default">
+          <div class="panel-heading"> <strong class="">New Account</strong>
+
+          </div>
+          <div class="panel-body">
+            <form id="register-form" class="form-horizontal" method="post" action="process_registration.php">
+              <div class="form-group">
+                <label for="username" class="col-sm-3 control-label">Email</label>
+                <div class="col-sm-9">
+                  <input type="email" class="form-control" name="email" placeholder="Username" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password" class="col-sm-3 control-label">Password</label>
+                <div class="col-sm-9">
+                  <input id="password" type="password" class="form-control" name="password" placeholder="Password" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password2" class="col-sm-3 control-label">Confirm</label>
+                <div class="col-sm-9">
+                  <input id="password2" type="password" class="form-control" name="password2" placeholder="Confirm password" required="" oninput="check(this)">
+                </div>
+              </div>
+              <div class="form-group last">
+                <div class="col-sm-offset-3 col-sm-9">
+                  <button type="submit" class="btn btn-success btn-sm">Register</button>
+                  <button type="reset" class="btn btn-default btn-sm">Reset</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- CORE JQUERY LIBRARY -->
+  <script src="javascript/jquery.js"></script>
+  <!-- CORE BOOTSTRAP LIBRARY -->
+  <script src="javascript/bootstrap.min.js"></script>
+</body>
+
+</html>

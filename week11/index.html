@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <title>Login</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/magister.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
+    <!-- CORE JQUERY LIBRARY -->
+    <style>
+      .panel-default {
+       opacity: 0.9;
+       margin-top:30px;
+      }
+      .panel-footer {
+        color: #000;
+      }
+      .form-group.last {
+       margin-bottom:0px;
+      }
+      label {
+        color: #555;
+      }
+      a {
+        color: #66f;
+      }
+    </style>
+    <script src="javascript/jquery.js"></script>
+    <script>
+      $(document).ready(function() {
+        $("#login-form").submit(function() {
+
+          $.ajax({
+            type: "POST",
+            url: "process_login.php",
+            data: $("#login-form").serialize(),
+            success: function(res, status, xhr) {
+              window.location.href = res;
+            },
+            error: function(req, status, msg){
+              $('#error-box').text('Invalid username or password');
+            }
+          });
+
+          return false; // override the default submit
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-md-offset-7">
+          <div class="panel panel-default">
+            <div class="panel-heading"> <strong class="">Login</strong>
+
+            </div>
+            <div class="panel-body">
+              <div id="error-box" class="alert-danger"></div>
+              <form id="login-form" class="form-horizontal" method="post" action="process_login.php">
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
+                  <div class="col-sm-9">
+                    <input id="username" type="email" class="form-control" name="email" placeholder="Email" required="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-3 control-label">Password</label>
+                  <div class="col-sm-9">
+                    <input type="password" class="form-control" name="pass" placeholder="Password" required="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-3 col-sm-9">
+                    <div class="checkbox">
+                      <label class="">
+                        <input type="checkbox" class="">Remember me</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group last">
+                  <div class="col-sm-offset-3 col-sm-9">
+                    <button type="submit" class="btn btn-success btn-sm">Sign in</button>
+                    <button type="reset" class="btn btn-default btn-sm">Reset</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="panel-footer">Not Registered? <a href="register.html" class="">Register here</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- CORE BOOTSTRAP LIBRARY -->
+    <script src="javascript/bootstrap.min.js"></script>
+  </body>
+</html>

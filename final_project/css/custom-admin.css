@@ -1,0 +1,42 @@
+body {
+  font-family: montserrat, arial, verdana;
+}
+.navbar {
+  box-shadow:0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
+}
+.btn.btn-fab {
+  margin-bottom:  23px;
+}
+#btn-drawer{
+  position: fixed;
+  right: 23px;
+  bottom: 0;
+  z-index: 100;
+}
+#new-btn {
+  display: block;
+  visibility: hidden;
+  transform: scale(0,0);
+  transition: all 0.075s;
+}
+#btn-drawer:hover > #new-btn {
+  visibility: visible;
+  transform:  scale(1, 1);
+  transition: all 0.075s;
+}
+.ar {
+  margin-top: 30px;
+  padding: 0;
+  /*position: relative;*/
+}
+.ar table {
+  position:relative;
+  top:-28px;
+}
+.ar table th {
+  padding: 0 0 8px 0;
+}
+.ar div {
+  position:absolute;
+  bottom:3px;
+}
